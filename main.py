@@ -21,7 +21,10 @@ model = PPO("MlpPolicy", env, verbose=1)
 model.learn(total_timesteps=20000)
 
 obs = env.reset()
+count = 0
 for i in range(2000):
     action, _states = model.predict(obs)
     obs, rewards, done, info = env.step(action)
-    env.render()
+    count += 1
+    if count % 500 == 499:
+        env.render()
